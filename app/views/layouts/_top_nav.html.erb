@@ -14,24 +14,6 @@
         <li>
           <%= link_to 'Home', :root %>
         </li>
-        <li>
-          <% if current_user %>
-            Signed in as <%= current_user.name %> | <%= link_to "Logout", '/logout' %>
-          <% else %>
-            <%= link_to 'Login', '/login' %> | <%= link_to 'Signup', '/signup' %>
-          <% end %>
-
-          <%= yield %>
-
-
-
-
-
-          <%= link_to 'Sign up', '/users/new' %>
-        </li>
-        <li>
-          <%= link_to "Sign in", '/users' %>
-        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
             Categories
@@ -43,7 +25,15 @@
             <% end %>
           </ul>
         </li>
+        <li style="display: flex; line-height: 50px;">
+          <% if current_user %>
+           Hello, <%= current_user.name %><%= link_to "Logout", '/logout' %>
+          <% else %>
+            <%= link_to 'Login', '/login' %>  <%= link_to 'Signup', '/signup' %>
+          <% end %>
+        </li>
       </ul>
+
       <ul class="nav navbar-nav navbar-right">
        <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
@@ -53,8 +43,8 @@
           </a>
           <ul class="dropdown-menu">
             <li><%= link_to 'Dashboard', [:admin, :root] %></li>
-            <li><%= link_to 'Categories', [:admin, :categories] %></li>
             <li><%= link_to 'Products',  [:admin, :products] %></li>
+            <li><%= link_to 'Categories',  [:admin, :categories] %></li>
           </ul>
         </li>
         <li>
@@ -66,3 +56,4 @@
     </div>
   </div>
 </nav>
+
