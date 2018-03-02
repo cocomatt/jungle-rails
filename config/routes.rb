@@ -5,6 +5,10 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
 
   resources :users, only: [:new, :create]
+    get '/login' => 'sessions#new'
+    post '/login' => 'sessions#create'
+    get '/logout' => 'sessions#destroy'
+
     get '/signup' => 'users#new'
     post '/users' => 'users#create'
 
