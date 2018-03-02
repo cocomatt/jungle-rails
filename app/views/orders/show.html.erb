@@ -3,7 +3,7 @@
     <h1>Order #<%= @order.id %></h1>
   </header>
   <div class="order-summary jumbotron">
-    <h4>Thank you for your order!</h4>
+    <h4>Thank you for your order! A receipt will be emailed to you  shortly.</h4>
   </div>
   <div class="panel panel-default items">
     <table class="table table-bordered">
@@ -19,7 +19,7 @@
         <% @order_total = 0 %>
         <% order_products = LineItem.where(order_id: @order.id)%>
         <% order_products.each do |order_product| %>
-          <%= render 'item', order_product: order_product %>
+          <%= render 'order', order_product: order_product %>
         <% end %>
       </tbody>
       <tfoot>

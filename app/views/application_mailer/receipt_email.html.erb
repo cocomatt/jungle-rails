@@ -1,0 +1,125 @@
+<style>
+.invoice-title h2, .invoice-title h3 {
+    display: inline-block;
+}
+.table > tbody > tr > .no-line {
+    border-top: none;
+}
+.table > thead > tr > .no-line {
+    border-bottom: none;
+}
+.table > tbody > tr > .thick-line {
+    border-top: 2px solid;
+}
+</style>
+<html>
+  <body>
+    <%= stylesheet_link_tag    'orders', media: 'all', 'data-turbolinks-track' => true %>
+    <section class="orders-show">
+
+      <header class="page-header">
+        <h1>Thank you for your order!</h1>
+      </header>
+
+      <div class="container">
+          <div class="row">
+              <div class="col-xs-12">
+              <div class="invoice-title">
+                <h2>Invoice </h2><h3 class="pull-right">Order #<%= @order.id %></h3>
+              </div>
+              <hr>
+              <div class="row">
+                <div class="col-xs-6">
+                  <address>
+                  <strong>Billed To:</strong><br>
+                    <%= current_user.name || "N/A " %> <br>
+                    123 Any Street SW<br>
+                    Calgary, AB T2R 0R6<br>
+                  </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <address>
+                    <strong>Shipped To:</strong><br>
+                    <%= current_user.name || "N/A " %> <br>
+                    123 Any Street SW<br>
+                    Calgary, AB T2R 0R6<br>
+                  </address>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-xs-6">
+                  <address>
+                    <strong>Payment Method:</strong><br>
+                    Credit Card ending **** 4242<br>
+                    <%= @order.email %>
+                  </address>
+                </div>
+                <div class="col-xs-6 text-right">
+                  <address>
+                    <strong>Order Date:</strong><br>
+                    <%= @order.created_at.to_formatted_s(:long) %><br><br>
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><strong>Order summary</strong></h3>
+                </div>
+                <div class="panel-body">
+                  <div class="table-responsive">
+                    <table class="table table-condensed">
+                      <thead>
+                                      <tr>
+                            <td><strong>Item</strong></td>
+                            <td class="text-center"><strong>Price</strong></td>
+                            <td class="text-center"><strong>Quantity</strong></td>
+                            <td class="text-right"><strong>Totals</strong></td>
+                                      </tr>
+                      </thead>
+                      <tbody>
+                        <% @order.line_items.each do |line_item| %>
+                          <%= render 'item', line_item: line_item %>
+                        <% end %>
+                      <tr>
+                        <td class="thick-line"></td>
+                        <td class="thick-line"></td>
+                        <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                        <td class="thick-line text-right"><%= number_to_currency(@order.total_cents / 100, precision: 2) %></td>
+                      </tr>
+                      <tr>
+                        <td class="no-line"></td>
+                        <td class="no-line"></td>
+                        <td class="no-line text-center"><strong>Shipping</strong></td>
+                        <td class="no-line text-right">$15</td>
+                      </tr>
+                      <tr>
+                        <td class="no-line"></td>
+                        <td class="no-line"></td>
+                        <td class="no-line text-center"><strong>Tax</strong></td>
+                        <td class="no-line text-right"><%= number_to_currency((@order.total_cents * 0.13)/ 100, precision: 2) %></td>
+                      </tr>
+                      <tr>
+                        <td class="no-line"></td>
+                        <td class="no-line"></td>
+                        <td class="no-line text-center"><strong>Total</strong></td>
+                        <td class="no-line text-right"><%= number_to_currency((@order.total_cents * 1.13)/ 100, precision: 2) %></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
+
+    </section>
+  </body>
+</html>
