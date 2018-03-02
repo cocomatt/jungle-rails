@@ -4,6 +4,7 @@
     <h1>My Cart</h1>
   </header>
 
+  <% if cart.count != 0 %>
   <div class="panel panel-default items">
     <table class="table table-bordered">
       <thead>
@@ -49,5 +50,11 @@
       <% end %>
     </div>
   </div>
+  <% else %>
+    <h2>Your cart is empty.</h2>
+    <h2>To add items to your cart, proceed to the
+    <%= link_to root_path  do%> Main Page </h2>
+    <% end %>
+  <% end %>
 
 </section>
