@@ -27,3 +27,8 @@ More information in their docs: <https://stripe.com/docs/testing#cards>
 * PostgreSQL 9.x
 * Stripe
 
+## Screenshots
+
+!["Screenshot of product page"](https://github.com/cocomatt/jungle-rails/blob/master/docs/Jungle-product-page.png?raw=true)
+
+!["Screenshot of Hotdog Slicer page with user reviews"](https://github.com/cocomatt/jungle-rails/blob/master/docs/Jungle-review-page.png?raw=true)
