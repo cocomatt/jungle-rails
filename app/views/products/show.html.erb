@@ -28,16 +28,16 @@
   </article>
 
   <% @reviews = @reviews.sort_by {|obj| obj.created_at }.reverse %>
-  <% @reviews.each do |details| %>
-    <% @user_review = User.find(details.user_id) %>
+  <% @reviews.each do |review| %>
+    <% @user_review = User.find(review.user_id) %>
     <article>
       <div class="row">
         <div class="col-sm-4 stars">
           <h3>
-            <% (1..details.rating).each do %>
+            <% (1..review.rating).each do %>
               <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
             <% end %>
-            <% (0..4 - details.rating).each do %>
+            <% (0..4 - review.rating).each do %>
               <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
             <% end %>
           </h3>
@@ -47,7 +47,7 @@
           <dt>User</dt>
           <dd><%= @user_review.name %>
           <dt>Review</dt>
-          <dd><%= details.description %></dd>
+          <dd><%= review.description %></dd>
           </dl>
         </div>
       </div>
