@@ -132,5 +132,53 @@ cat3.products.create!({
   price: 2_483.75
 })
 
+## USERS
+
+puts "Re-creating Users ... "
+
+User.destroy_all
+
+User.create!({
+  name: "Debbie Harry",
+  email: "DH@gmail.com",
+  password: "1234",
+  password_confirmation: "1234"
+})
+
+## REVIEWS
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+product1 = Product.find_or_create_by! id: 8
+
+product1.reviews.create!({
+  user_id: 1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 5
+})
+
+product1.reviews.create!({
+  user_id: 1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 3
+})
+
+product1.reviews.create!({
+  user_id: 1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 4
+})
+
+product2 = Product.find_or_create_by! id: 12
+
+product2.reviews.create!({
+  user_id: 1,
+  description: Faker::Hipster.paragraph(4),
+  rating: 4
+})
+
+
 
 puts "DONE!"
